@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.text-centre {
+  text-align: center;
+}
+
+.two-d-items {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+#noise-graph,
+#noise-grid,
+#perlin-grid {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  display: flex;
+  max-width: fit-content;
+  max-height: fit-content;
+}
+
+form .input-group:first-child {
+  margin-top: 32px;
+}
+
+form .input-group:last-child {
+  margin-bottom: 12px;
+}
+
+.input-group p {
+  margin: 4px;
+}

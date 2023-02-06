@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>All about noise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <script type="module" src="index.js"></script>
+  </head>
+  <body>
+    <div class="items">
+      <!--
+        First dimension
+      -->
+      <h1 class="text-centre">1 Dimension</h1>
+      <hr />
+      <div class="one-d-items">
+        <!--
+          Random noise
+        -->
+        <div>
+          <!-- Graph -->
+          <h1>Random noise</h1>
+          <div id="noise-graph"></div>
+
+          <!-- Inputs -->
+          <form id="noise-graph-form">
+            <div class="input-group">
+              <p>Detail</p>
+              <input
+                type="range"
+                name="detail"
+                min="2"
+                max="16"
+                step="2"
+                value="8"
+              />
+            </div>
+            <div class="input-group">
+              <p>Seed</p>
+              <input type="text" name="seed" value="Hello World!" />
+            </div>
+          </form>
+        </div>
+
+        <!--
+          Perlin noise
+        -->
+        <div>
+          <!-- Graph -->
+          <h1>Perlin noise</h1>
+          <div id="perlin-graph"></div>
+        </div>
+      </div>
+
+      <!--
+        Second dimension
+      -->
+      <h1 class="text-centre">2 Dimensions</h1>
+      <hr />
+      <div class="two-d-items">
+        <!--
+          Random noise
+        -->
+        <div>
+          <!-- Grid -->
+          <h1>Random noise</h1>
+          <div id="noise-grid"></div>
+
+          <!-- Inputs -->
+          <form id="noise-grid-form">
+            <div class="input-group">
+              <p>Detail</p>
+              <input
+                type="range"
+                name="detail"
+                min="2"
+                max="128"
+                step="1"
+                value="16"
+              />
+            </div>
+            <div class="input-group">
+              <p>Seed</p>
+              <input type="text" name="seed" value="Hello World!" />
+            </div>
+          </form>
+        </div>
+
+        <!--
+          Perlin noise
+        -->
+        <div>
+          <h1>Perlin noise</h1>
+          <div id="perlin-grid"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
