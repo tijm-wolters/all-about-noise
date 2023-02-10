@@ -11,10 +11,12 @@ export class PseudoRandom {
     let result = 0;
 
     for (let char = 0; char < seed.length; char++) {
-      result += seed.charCodeAt(char);
+      result +=
+        seed.charCodeAt(char) *
+        this._SMALL_PRIMES[Math.round(char) % this._SMALL_PRIMES.length];
     }
 
-    return result;
+    return ((result * result * result) % 100) / 100;
   }
 
   /**
