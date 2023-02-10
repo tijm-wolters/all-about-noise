@@ -1,4 +1,4 @@
-import { pseudoRandomGet } from './math.js';
+import { PseudoRandom } from './math.js';
 
 export function draw1DNoiseGraph(parentEl, detail = 2, seed, length = 256) {
   const canvas = document.createElement('canvas');
@@ -11,9 +11,10 @@ export function draw1DNoiseGraph(parentEl, detail = 2, seed, length = 256) {
   // x = 0, y = 50%, start on the left in the middle of the graph.
   ctx.moveTo(0, length / 4);
 
+  const pseudoRandom = new PseudoRandom(seed);
+
   for (let point = 0; point * detail < length; point++) {
-    // I think my seeds are stupid AF, don't know tho
-    const random = pseudoRandomGet(point.toString() + seed);
+    const random = pseudoRandom.get(point);
 
     ctx.lineTo((point + 1) * detail, (random * length) / 2);
   }
@@ -35,13 +36,19 @@ export function draw2DNoiseGrid(
 
   canvas.width = canvas.height = gridSize;
 
+  const pseudoRandom = new PseudoRandom(seed);
+
   // Create rows
   for (let row = 0; row < nodes; row++) {
     // Create nodes within the row
     for (let node = 0; node < nodes; node++) {
-      const random = pseudoRandomGet(seed, row, node);
+      const randomH = pseudoRandom.get(row, node, 1);
+      const randomS = pseudoRandom.get(row, node, 2);
+      const randomL = pseudoRandom.get(row, node, 3);
 
-      ctx.fillStyle = `rgba(0, 0, 0, ${Math.random()})`;
+      ctx.fillStyle = `hsl(${randomH * 360}, ${randomS * 100}%, ${
+        randomL * 100
+      }%)`;
       ctx.fillRect(node * nodeSize, row * nodeSize, nodeSize, nodeSize);
     }
   }

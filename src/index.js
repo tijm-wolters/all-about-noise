@@ -29,7 +29,15 @@ const noiseGridInputs = document.getElementById('noise-grid-form');
 
 noiseGridInputs.addEventListener('input', () => {
   noiseGridParent.replaceChildren([]);
-  draw2DNoiseGrid(noiseGridParent, noiseGridInputs.detail.value);
+  draw2DNoiseGrid(
+    noiseGridParent,
+    noiseGridInputs.detail.value,
+    noiseGridInputs.seed.value
+  );
 });
 
-draw2DNoiseGrid(noiseGridParent, noiseGridInputs.detail.value);
+draw2DNoiseGrid(
+  noiseGridParent,
+  noiseGridInputs.detail.value,
+  noiseGridInputs.seed.value
+);

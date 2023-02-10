@@ -1,31 +1,47 @@
-/**
- * Deterministically generates a pseudo random number based on the seed.
- *
- * **IMPORTANT:** Will always return the same result for the same seed!
- * @param {string} seed
- * @returns {number} A pseudorandom number between -1 and 1.
- */
-export function pseudoRandomGet(seed) {
-  const MILLIONTH_PRIME = 15485863;
-  const HUNDERED_MILLIONTH_PRIME = 2038074743;
+export class PseudoRandom {
+  _MILLIONTH_PRIME = 15485863;
+  _HUNDERED_MILLIONTH_PRIME = 2038074743;
+  _SMALL_PRIMES = [541, 1223, 1987, 2741, 3571];
 
-  /**
-   * Define the pseudo random algorithm for re-use in seed hashing.
-   * @returns {number} A pseudorandom number between -1 and 1.
-   */
-  const pseudoRandom = (seed) => {
-    const a = seed * MILLIONTH_PRIME;
-    return ((a * a * a) % HUNDERED_MILLIONTH_PRIME) / HUNDERED_MILLIONTH_PRIME;
-  };
-
-  let numberSeed = 0;
-
-  // I don't think this is a good way to convert the seed to an integer, although, I can't put my finger on it.
-  for (let i = 0; i < seed.length; i++) {
-    numberSeed += pseudoRandom(seed.charCodeAt(i));
+  constructor(seed) {
+    this.seed = this._integerHash(seed);
   }
 
-  return pseudoRandom(numberSeed / seed.length);
+  _integerHash(seed) {
+    let result = 0;
+
+    for (let char = 0; char < seed.length; char++) {
+      result += seed.charCodeAt(char);
+    }
+
+    return result;
+  }
+
+  /**
+   * Sets the class seed based on the input string.
+   * @param {string} seed
+   */
+  setSeed(seed) {
+    this.seed = this._integerHash(seed);
+  }
+
+  /**
+   * Deterministically generates a pseudo random number based on the seed and coordinates
+   * @param  {Array<number>} coordinates The coordinates to generate the pseudo random number.
+   */
+  get(...coordinates) {
+    let seed = 0;
+
+    for (let i = 0; i < coordinates.length; i++) {
+      seed += coordinates[i] * this._SMALL_PRIMES[i];
+    }
+
+    const a = seed + this.seed * this._MILLIONTH_PRIME;
+    return (
+      ((a * a * a) % this._HUNDERED_MILLIONTH_PRIME) /
+      this._HUNDERED_MILLIONTH_PRIME
+    );
+  }
 }
 
 /**
