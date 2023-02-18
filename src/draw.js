@@ -1,4 +1,4 @@
-import { PseudoRandom } from './math.js';
+import { PseudoRandom, Perlin } from './math.js';
 
 export function draw1DNoiseGraph(parentEl, detail = 2, seed, length = 256) {
   const canvas = document.createElement('canvas');
@@ -42,15 +42,38 @@ export function draw2DNoiseGrid(
   for (let row = 0; row < nodes; row++) {
     // Create nodes within the row
     for (let node = 0; node < nodes; node++) {
-      const randomH = pseudoRandom.get(row, node, 1);
-      const randomS = pseudoRandom.get(row, node, 2);
-      const randomL = pseudoRandom.get(row, node, 3);
+      const random = pseudoRandom.get(row, node);
 
-      ctx.fillStyle = `hsl(${randomH * 360}, ${randomS * 100}%, ${
-        randomL * 100
-      }%)`;
+      ctx.fillStyle = `rgba(0, 0, 0, ${random})`;
       ctx.fillRect(node * nodeSize, row * nodeSize, nodeSize, nodeSize);
     }
   }
+  parentEl.appendChild(canvas);
+}
+
+export function draw2DPerlinGrid(
+  parentEl,
+  nodes = 16,
+  seed = 'abc',
+  gridSize = 256
+) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const nodeSize = gridSize / nodes;
+
+  canvas.width = canvas.height = gridSize;
+
+  const perlin = new Perlin(seed);
+
+  for (let row = 0; row < nodes; row++) {
+    for (let node = 0; node < nodes; node++) {
+      const perlinRand = perlin.get2D(row * 0.1, node * 0.1);
+
+      ctx.fillStyle = `rgba(0, 0, 0, ${perlinRand})`;
+      ctx.fillRect(node * nodeSize, row * nodeSize, nodeSize, nodeSize);
+    }
+  }
+
   parentEl.appendChild(canvas);
 }

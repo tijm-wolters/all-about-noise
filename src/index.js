@@ -1,4 +1,4 @@
-import { draw1DNoiseGraph, draw2DNoiseGrid } from './draw.js';
+import { draw1DNoiseGraph, draw2DNoiseGrid, draw2DPerlinGrid } from './draw.js';
 
 /**
  * One dimensional random noise graph.
@@ -40,4 +40,25 @@ draw2DNoiseGrid(
   noiseGridParent,
   noiseGridInputs.detail.value,
   noiseGridInputs.seed.value
+);
+
+/**
+ * Two dimensional perlin noise grid.
+ */
+const perlinGridParent = document.getElementById('perlin-grid');
+const perlinGridInputs = document.getElementById('perlin-grid-form');
+
+perlinGridInputs.addEventListener('input', () => {
+  perlinGridParent.replaceChildren([]);
+  draw2DPerlinGrid(
+    perlinGridParent,
+    perlinGridInputs.detail.value,
+    perlinGridInputs.seed.value
+  );
+});
+
+draw2DPerlinGrid(
+  perlinGridParent,
+  perlinGridInputs.detail.value,
+  perlinGridInputs.seed.value
 );

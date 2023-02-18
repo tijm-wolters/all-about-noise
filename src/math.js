@@ -50,46 +50,38 @@ export class PseudoRandom {
  * The next part of my code, does not work (I think) :)
  */
 
-class Perlin {
-  /**
-   * Array of rows, which are arrays of nodes, which are gradient vectors,
-   * can be solved by implementing seeding based on a hash from used input seed and location.
-   * Example:
-   * [[{ x: 0.6, y: -0.1 }, {...}], [...]]
-   */
-  gradientGrid = [];
+export class Perlin {
+  constructor(seed) {
+    this.random = new PseudoRandom(seed);
+  }
 
   _lerp(a0, a1, w) {
-    return (a1 - a0) * w + a0;
+    // return (a1 - a0) * w + a0;
+    return (a1 - a0) * ((w * (w * 6.0 - 15.0) + 10.0) * w * w * w) + a0;
   }
 
   // TODO: Implement seeding
-  _randomGradient() {
-    let theta = Math.random() * 2 * Math.PI;
+  _randomGradient(x, y) {
+    const theta = this.random.get(x, y) * 2 * Math.PI;
     return { x: Math.cos(theta), y: Math.sin(theta) };
   }
 
-  _getDotProduct(ix, iy, x, y) {
-    let gradient;
-    if (this.gradientGrid[[ix, iy]]) {
-      gradient = this.gradientGrid[[ix, iy]];
-    } else {
-      gradient = this._randomGradient();
-      this.gradientGrid[[ix, iy]] = gradient;
-    }
+  _getDotProduct(ix, iy, x, y, first) {
+    const gradient = this._randomGradient(ix, iy);
+
     const distance = { x: x - ix, y: y - iy };
 
     // Calculate the dot product
     return distance.x * gradient.x + distance.y * gradient.y;
   }
 
-  get(x, y) {
+  get2D(x, y) {
     const x0 = Math.floor(x);
     const x1 = x0 + 1;
     const y0 = Math.floor(y);
     const y1 = y0 + 1;
 
-    // Determine weight for interpolating
+    // Determine weight for interpolation
     const sx = x - x0;
     const sy = y - y0;
 
@@ -101,23 +93,8 @@ class Perlin {
 
     n0 = this._getDotProduct(x0, y1, x, y);
     n1 = this._getDotProduct(x1, y1, x, y);
-    const ix1 = this._interpolate(n0, n1, sx);
+    const ix1 = this._lerp(n0, n1, sx);
 
     return this._lerp(ix0, ix1, sy);
-  }
-}
-
-class Perlin1D {
-  _lerp(a0, a1, weight) {
-    return (a1 - a0) * weight + a0;
-  }
-
-  get(x) {
-    const x0 = Math.floor(x);
-    const x1 = x + 1;
-
-    const weight = x - x0;
-
-    return this._lerp(x0, x1, weight);
   }
 }

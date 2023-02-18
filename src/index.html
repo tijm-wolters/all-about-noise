@@ -92,8 +92,26 @@
           Perlin noise
         -->
         <div>
+          <!-- Grid -->
           <h1>Perlin noise</h1>
           <div id="perlin-grid"></div>
+
+          <!-- Inpputs -->
+          <form id="perlin-grid-form">
+            <p>Detail</p>
+            <input
+              type="range"
+              name="detail"
+              min="2"
+              max="256"
+              step="1"
+              value="128"
+            />
+            <div class="input-group">
+              <p>Seed</p>
+              <input type="text" name="seed" value="Hello World!" />
+            </div>
+          </form>
         </div>
       </div>
     </div>
