@@ -46,10 +46,6 @@ export class PseudoRandom {
   }
 }
 
-/**
- * The next part of my code, does not work (I think) :)
- */
-
 export class Perlin {
   constructor(seed) {
     this.random = new PseudoRandom(seed);
@@ -60,7 +56,6 @@ export class Perlin {
     return (a1 - a0) * ((w * (w * 6.0 - 15.0) + 10.0) * w * w * w) + a0;
   }
 
-  // TODO: Implement seeding
   _randomGradient(x, y) {
     const theta = this.random.get(x, y) * 2 * Math.PI;
     return { x: Math.cos(theta), y: Math.sin(theta) };
