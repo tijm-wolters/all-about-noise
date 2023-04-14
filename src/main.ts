@@ -1,3 +1,4 @@
+import './style.css';
 import { draw1DNoiseGraph, draw2DNoiseGrid, draw2DPerlinGrid } from './draw.js';
 
 /**
