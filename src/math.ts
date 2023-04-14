@@ -21,7 +21,7 @@ export class PseudoRandom {
     return ((result * result * result) % 100) / 100;
   }
 
-  setSeed(seed: string) {
+  setSeed(seed: string): void {
     this.seed = this._integerHash(seed);
   }
 
@@ -29,7 +29,7 @@ export class PseudoRandom {
    * Deterministically generates a pseudo random number based on the seed and coordinates
    * @param {Array<number>} coordinates The coordinates to generate the pseudo random number.
    */
-  get(...coordinates: number[]) {
+  get(...coordinates: number[]): number {
     let seed = 0;
 
     for (let i = 0; i < coordinates.length; i++) {
