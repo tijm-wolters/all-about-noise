@@ -10,6 +10,9 @@ function _attachCanvas(
   const formEl = document.getElementById(
     baseIdentifier + '-form'
   ) as HTMLFormElement;
+  const renderTimeMetricDisplayEl = document.getElementById(
+    baseIdentifier + '-render-time'
+  );
 
   formEl.addEventListener('input', () => {
     parentEl.replaceChildren();
@@ -17,6 +20,7 @@ function _attachCanvas(
       zoom: formEl.zoom.value,
       seed: formEl.seed.value,
       size: 256,
+      renderTimeMetricDisplayEl: renderTimeMetricDisplayEl ?? undefined,
     });
   });
 
@@ -24,6 +28,7 @@ function _attachCanvas(
     zoom: formEl.zoom.value,
     seed: formEl.seed.value,
     size: 256,
+    renderTimeMetricDisplayEl: renderTimeMetricDisplayEl ?? undefined,
   });
 }
 

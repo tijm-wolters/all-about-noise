@@ -14,7 +14,7 @@ Because I struggle with motivation persistence I will define some clear goals to
 
 Currently rendering the 2D Perlin noise grid with a higher amount of detail already takes a few seconds to fully draw, this _has_ to be improved especially since I want to take this in the 3rd dimension as well. Below a small list of my goals for this.
 
-- [ ] Implement timing when rendering and display this on the web page.
+- [x] Implement timing when rendering and display this on the web page.
 - [ ] Define and implement a realistic performance target based on the acquired metrics.
 
 ### One dimensional Perlin noise implementation
