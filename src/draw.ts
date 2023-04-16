@@ -3,8 +3,15 @@ import { NoiseFnOpts } from './types';
 
 export function draw1DNoiseGraph(
   parentEl: HTMLElement,
-  { seed = 'Hello World!', size = 256, zoom = 2 }: NoiseFnOpts
+  {
+    seed = 'Hello World!',
+    size = 256,
+    zoom = 2,
+    renderTimeMetricDisplayEl,
+  }: NoiseFnOpts
 ): void {
+  const startTime = Date.now();
+
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d')!;
 
@@ -25,12 +32,23 @@ export function draw1DNoiseGraph(
 
   ctx.stroke();
   parentEl.appendChild(canvas);
+
+  if (renderTimeMetricDisplayEl) {
+    renderTimeMetricDisplayEl.innerHTML = `${Date.now() - startTime}ms`;
+  }
 }
 
 export function draw2DNoiseGrid(
   parentEl: HTMLElement,
-  { seed = 'Hello World!', size = 256, zoom = 16 }: NoiseFnOpts
+  {
+    seed = 'Hello World!',
+    size = 256,
+    zoom = 16,
+    renderTimeMetricDisplayEl,
+  }: NoiseFnOpts
 ): void {
+  const startTime = Date.now();
+
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d')!;
 
@@ -51,12 +69,23 @@ export function draw2DNoiseGrid(
     }
   }
   parentEl.appendChild(canvas);
+
+  if (renderTimeMetricDisplayEl) {
+    renderTimeMetricDisplayEl.innerHTML = `${Date.now() - startTime}ms`;
+  }
 }
 
 export function draw2DPerlinGrid(
   parentEl: HTMLElement,
-  { seed = 'Hello World!', size = 256, zoom = 16 }: NoiseFnOpts
+  {
+    seed = 'Hello World!',
+    size = 256,
+    zoom = 16,
+    renderTimeMetricDisplayEl,
+  }: NoiseFnOpts
 ): void {
+  const startTime = Date.now();
+
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d')!;
 
@@ -76,4 +105,8 @@ export function draw2DPerlinGrid(
   }
 
   parentEl.appendChild(canvas);
+
+  if (renderTimeMetricDisplayEl) {
+    renderTimeMetricDisplayEl.innerHTML = `${Date.now() - startTime}ms`;
+  }
 }

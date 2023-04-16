@@ -11,6 +11,7 @@ body {
   text-align: center;
 }
 
+.one-d-items,
 .two-d-items {
   display: flex;
   flex-direction: row;
